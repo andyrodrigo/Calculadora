@@ -46,6 +46,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    //Indica Operação que será feita
+    function indicaOperacao(sinal){
+
+        let valorNoDisplay = String(display.value)
+        cache = Number(display.value)
+        resposta = operar( resposta, cache, operador)
+        let parcial = String(resposta)
+        operador= sinal
+    
+        if(novo == false){
+          if(memoria.innerText == ''){
+            memoria.innerText = `${valorNoDisplay} ${sinal}`
+          }else{
+            memoria.innerText = `${parcial} ${sinal}`
+          }   
+        }else{//se for para gerar uma nova conta
+          novo = false
+          memoria.innerText = `${valorNoDisplay} ${sinal}`    
+        }
+        display.value = Number(0) //limpa display
+    }
+
     //Realiza as operações Matemáticas
     function operar(n1, n2, op){
         let resp = Number(0)
@@ -73,26 +95,33 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('.')
     }
 
+    //Mostra resultado Final ao clicar em =
     function exibeResultado() {
-        alert('=')
+        let valorNoDisplay = String(display.value)
+        let numeroNaTela = display.value
+        if(novo == false){
+            if(memoria.innerText == ''){
+                memoria.innerText = valorNoDisplay
+                resposta = Number(numeroNaTela)
+                resultado.innerText = `Resultado: ${valorNoDisplay}`
+            }else{
+                memoria.innerText += ` ${valorNoDisplay}`
+                resposta = operar(resposta, numeroNaTela, operador)
+                resultado.innerText = `Resultado: ${resposta}`
+            }         
+        }else{//se for para gerar uma nova conta
+          memoria.innerText = valorNoDisplay
+          resposta = operar(resposta,numeroNaTela,operador)
+          resultado.innerText = `Resultado: ${resposta}`
+        }
+        novo=true
+        display.value = Number(resposta)
+        resposta = Number(0)
+        debug.innerText = String(resposta)
+        operador='+'
     }
 
-    function soma() {
-        alert('+')
-    }
-
-    function subtracao() {
-        alert('-')
-    }
-
-    function multiplicacao() {
-        alert('*')
-    }
-
-    function divisao() {
-        alert('/')
-    }
-
+    //Limpa toda a memória e valores em tela
     function limpaTela() {
         display.value = Number(0)
         memoria.innerText = ""
@@ -115,24 +144,12 @@ document.addEventListener('DOMContentLoaded', function() {
     teclaNum[7].addEventListener('click', function(){mostraNum(7)}, false)
     teclaNum[8].addEventListener('click', function(){mostraNum(8)}, false)
     teclaNum[9].addEventListener('click', function(){mostraNum(9)}, false)
-
-/*
-    num00.addEventListener('click', mostraZero, false)
-    num01.addEventListener('click', mostraUM, false)
-    num02.addEventListener('click', mostraDois, false)
-    num03.addEventListener('click', mostraTres, false)
-    num04.addEventListener('click', mostraQuatro, false)
-    num05.addEventListener('click', mostraCinco, false)
-    num06.addEventListener('click', mostraSeis, false)
-    num07.addEventListener('click', mostraSete, false)
-    num08.addEventListener('click', mostraOito, false)
-    num09.addEventListener('click', mostraNove, false)*/
     ponto.addEventListener('click', mostraPonto, false)
     igual.addEventListener('click', exibeResultado, false)
-    mais.addEventListener('click', soma, false)
-    menos.addEventListener('click', subtracao, false)
-    mult.addEventListener('click', multiplicacao, false)
-    divide.addEventListener('click', divisao, false)
+    mais.addEventListener('click', function(){indicaOperacao('+')} , false)
+    menos.addEventListener('click', function(){indicaOperacao('-')}, false)
+    mult.addEventListener('click', function(){indicaOperacao('*')}, false)
+    divide.addEventListener('click', function(){indicaOperacao('/')}, false)
     limpa.addEventListener('click', limpaTela, false)
 
 },false)
