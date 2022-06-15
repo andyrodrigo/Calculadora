@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let display = document.getElementById('display'); //Tela de Resultados
     let memoria = document.getElementById('memo'); //Guarda resultados
     let resultado = document.getElementById('res'); 
-    let debug = document.getElementById('entenda');
     let cache = Number(0)
     let resposta = Number(0)
     let operador = '+'
@@ -117,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
         novo=true
         display.value = Number(resposta)
         resposta = Number(0)
-        debug.innerText = String(resposta)
         operador='+'
     }
 

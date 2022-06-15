@@ -1,0 +1,53 @@
+
+#corpo{
+    width: 200px;
+    height: 300px; 
+    background-color: #2d3436;
+    background-image: linear-gradient(315deg, #2d3436 0%, #d3d3d3 74%);
+    border-radius: 10px;
+    border: 2px solid black;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+header{
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+    width: 100%;
+    height: 32%;
+    border-bottom: 10px solid gray;
+}
+
+#marca{
+    color: white;
+    position: relative;
+    left: 25%;
+    /*background-color: blueviolet;*/
+    width:min-content
+}
+
+#display{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 5px solid gray;
+    border-radius: 2px;
+    text-align: right;
+    position: relative;
+    left: 5%;
+}
+
+#memo{
+    padding-top: 2px;
+    color: white;
+    position: relative;
+    left: 40%;
+}
+
+#res{
+    display: none;
+}
