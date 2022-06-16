@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const limpa = document.getElementById('limpa');
     //Outros
     let num 
+    let flutuante = false
     let display = document.getElementById('display'); //Tela de Resultados
     let memoria = document.getElementById('memo'); //Guarda resultados
     let resultado = document.getElementById('res'); 
@@ -37,17 +38,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Mostra tecla numérica pressionada no display
     function mostraNum(tecla) {
-        num = Number(tecla)
+      num = Number(tecla)
+      if(flutuante){
+        if(display.value == 0){
+          display.value = num/10
+        }else{
+          display.value = Number(display.value) + num/10
+        }
+      }else{
         if(display.value == 0){
           display.value = num
         }else{
           display.value += num
         }
+      }
+      flutuante = false
     }
 
     //Indica Operação que será feita
     function indicaOperacao(sinal){
 
+        flutuante = false
         let valorNoDisplay = String(display.value)
         cache = Number(display.value)
         resposta = operar( resposta, cache, operador)
@@ -91,11 +102,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     function mostraPonto() {
-        alert('.')
+      flutuante = true
     }
 
     //Mostra resultado Final ao clicar em =
     function exibeResultado() {
+        flutuante = false
         let valorNoDisplay = String(display.value)
         let numeroNaTela = display.value
         if(novo == false){
@@ -126,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         resultado.innerText = ""
         resposta = Number(0)
         cache = Number(0)
+        flutuante = false
         novo= false
         operador='+'
     }
