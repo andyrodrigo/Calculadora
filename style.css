@@ -71,6 +71,20 @@ header{
     color: goldenrod;
 }
 
+.ativo{
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    color: yellow;
+    background-color: green;
+    border-radius: 5px;
+}
+
+.ativo:hover{
+    background-color: darkgreen;
+    color: goldenrod;
+}
+
 .imagemDeTecla{
     width: 20px;
     height: 20px;

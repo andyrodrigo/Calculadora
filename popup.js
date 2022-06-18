@@ -105,8 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
       let dot = /[.]/g //Expressãso regular com um ponto dentro
       if(display.innerText.search(dot) == '-1'){//testa se já tem um ponto no numero
         flutuante = true
-        ponto.style.color= 'yellow'
-        ponto.style.backgroundColor= 'green'
+        ponto.classList.add('ativo');
         ultima = "ponto"
       }else{
         alert('Já possui uma vírgula')
@@ -115,8 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function encerraPonto(){
       flutuante = false
-      ponto.style.color= 'white'
-      ponto.style.backgroundColor= 'black'
+      ponto.classList.remove("ativo");
     }
 
     //Mostra resultado Final ao clicar em =
@@ -172,11 +170,11 @@ document.addEventListener('DOMContentLoaded', function() {
           encerraPonto()
           break;
         case 'sinal':
-          //alert('APAGA SINAL') 
           memoria.innerText = ''
           ultima = "tecla"
           display.innerText = String(parcial)
           resposta = 0
+          operador = '+'
           break;
         case 'tecla':
           if(display.innerText == 0){
