@@ -2,10 +2,23 @@
     "manifest_version": 3,
   
     "name": "Calculadora",
-    "description": "Calculadora para o navegador",
+    "description": "Uma Calculadora prática para ser usada em um click no navegador",
     "version": "1.0",
   
     "action": {
-     "default_popup": "popup.html"
+     "default_popup": "popup.html",
+     "default_icon": {
+        "16": "imagens/icon16.png",
+        "32": "imagens/icon32.png",
+        "48": "imagens/icon48.png",
+        "128": "imagens/icon128.png"
+      }
+    },
+
+    "icons": {
+      "16": "imagens/icon16.png",
+      "32": "imagens/icon32.png",
+      "48": "imagens/icon48.png",
+      "128": "imagens/icon128.png"
     }
   }

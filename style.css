@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-decoration: none;
+}
 
 #corpo{
     width: 200px;
@@ -24,22 +30,29 @@ header{
 }
 
 #marca{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
     color: white;
-    position: relative;
-    left: 25%;
-    /*background-color: blueviolet;*/
-    width:min-content
+    width:min-content;
+    font-family: sans-serif;
 }
 
 #display{
+    font-family: fantasy;
+    font-size: 20px;
     width: 80%;
     background-color: aliceblue;
     padding: 5px;
-    border: 5px solid gray;
+    border: 8px solid gray;
     border-radius: 2px;
     text-align: right;
-    position: relative;
-    left: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    
+    overflow: hidden;
 }
 
 #memo{
@@ -62,13 +75,23 @@ header{
     text-align: center;
     color: white;
     background-color: black;
+    background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
     border-radius: 5px;
-    
+    font-size: 20px;
+    box-shadow:0 3px 0 black;
+    margin-bottom: 3px;
 }
 
 .teclas:hover{
+    background-image: none;
     background-color: darkslategray;
     color: goldenrod;
+}
+
+.teclas:active{
+    position:relative;
+    top:3px;
+    box-shadow:none;
 }
 
 .ativo{
@@ -76,17 +99,20 @@ header{
     height: 35px;
     text-align: center;
     color: yellow;
-    background-color: green;
+    background-color: #00b712;
+    background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
+    box-shadow:0 3px 0 rgb(0, 48, 0);
     border-radius: 5px;
 }
 
 .ativo:hover{
     background-color: darkgreen;
+    background-image: none;
     color: goldenrod;
 }
 
 .imagemDeTecla{
     width: 20px;
     height: 20px;
-    padding-top: 5px;
+    padding-top: 8px;
 }
