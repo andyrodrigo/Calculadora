@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Variáveis------------------------------------------------------------
 
-    //Botões
+    //Botões----
+    //teclado
     const teclaNum = new Array(10)
     teclaNum[0] = document.getElementById('num00');
     teclaNum[1] = document.getElementById('num01');
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     teclaNum[8] = document.getElementById('num08');
     teclaNum[9] = document.getElementById('num09');
 
+    //operações
     const ponto = document.getElementById('ponto');
     const igual = document.getElementById('igual');
     const mais = document.getElementById('mais');
@@ -23,12 +25,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const mult = document.getElementById('mult');
     const divide = document.getElementById('divide');
     const limpa = document.getElementById('limpa');
+    const back = document.getElementById('back');
+    //---------
     //Outros
-    let num 
+    let ultima = "limpa"
     let flutuante = false
     let display = document.getElementById('display'); //Tela de Resultados
     let memoria = document.getElementById('memo'); //Guarda resultados
-    let resultado = document.getElementById('res'); 
+    let resultado = document.getElementById('res');
+    let parcial
     let cache = Number(0)
     let resposta = Number(0)
     let operador = '+'
@@ -38,44 +43,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Mostra tecla numérica pressionada no display
     function mostraNum(tecla) {
-      num = Number(tecla)
+      ultima = "tecla"
       if(flutuante){
-        if(display.value == 0){
-          display.value = num/10
-        }else{
-          display.value = Number(display.value) + num/10
-        }
+        display.innerText = `${display.innerText}.${tecla}`
       }else{
-        if(display.value == 0){
-          display.value = num
+        if(display.innerText == 0){
+          display.innerText = tecla
         }else{
-          display.value += num
+          display.innerText = `${display.innerText}${tecla}`
         }
       }
-      flutuante = false
+      encerraPonto()
     }
 
     //Indica Operação que será feita
     function indicaOperacao(sinal){
-
-        flutuante = false
-        let valorNoDisplay = String(display.value)
-        cache = Number(display.value)
-        resposta = operar( resposta, cache, operador)
-        let parcial = String(resposta)
+        ultima = "sinal"
+        encerraPonto()
+        cache = Number(display.innerText)
+        resposta = operar(resposta, cache, operador)
+        parcial = String(resposta)
         operador= sinal
-    
-        if(novo == false){
+
+        if(novo){//se for para gerar uma nova conta
+          novo = false
+          memoria.innerText = `${display.innerText} ${sinal}`
+        }else{
           if(memoria.innerText == ''){
-            memoria.innerText = `${valorNoDisplay} ${sinal}`
+            memoria.innerText = `${display.innerText} ${sinal}`
           }else{
             memoria.innerText = `${parcial} ${sinal}`
-          }   
-        }else{//se for para gerar uma nova conta
-          novo = false
-          memoria.innerText = `${valorNoDisplay} ${sinal}`    
+          }  
         }
-        display.value = Number(0) //limpa display
+        display.innerText = '0' //limpa display
     }
 
     //Realiza as operações Matemáticas
@@ -102,14 +102,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     function mostraPonto() {
-      flutuante = true
+      let dot = /[.]/g //Expressãso regular com um ponto dentro
+      if(display.innerText.search(dot) == '-1'){//testa se já tem um ponto no numero
+        flutuante = true
+        ponto.style.color= 'yellow'
+        ponto.style.backgroundColor= 'green'
+        ultima = "ponto"
+      }else{
+        alert('Já possui uma vírgula')
+      }
+    }
+
+    function encerraPonto(){
+      flutuante = false
+      ponto.style.color= 'white'
+      ponto.style.backgroundColor= 'black'
     }
 
     //Mostra resultado Final ao clicar em =
     function exibeResultado() {
-        flutuante = false
-        let valorNoDisplay = String(display.value)
-        let numeroNaTela = display.value
+        ultima = "igual"
+        encerraPonto()
+        let valorNoDisplay = display.innerText
+        let numeroNaTela = display.innerText
         if(novo == false){
             if(memoria.innerText == ''){
                 memoria.innerText = valorNoDisplay
@@ -126,14 +141,15 @@ document.addEventListener('DOMContentLoaded', function() {
           resultado.innerText = `Resultado: ${resposta}`
         }
         novo=true
-        display.value = Number(resposta)
+        display.innerText = String(resposta)
         resposta = Number(0)
         operador='+'
     }
 
     //Limpa toda a memória e valores em tela
     function limpaTela() {
-        display.value = Number(0)
+        ultima = "limpa"
+        display.innerText = '0'
         memoria.innerText = ""
         resultado.innerText = ""
         resposta = Number(0)
@@ -143,18 +159,55 @@ document.addEventListener('DOMContentLoaded', function() {
         operador='+'
     }
 
+    //Volta a última ação
+    function backspace(){
+      switch (ultima) {
+        case 'limpa':
+          //nada a ser feito
+          break;
+        case "igual":
+          limpaTela()
+          break;
+        case 'ponto':
+          encerraPonto()
+          break;
+        case 'sinal':
+          //alert('APAGA SINAL') 
+          memoria.innerText = ''
+          ultima = "tecla"
+          display.innerText = String(parcial)
+          resposta = 0
+          break;
+        case 'tecla':
+          if(display.innerText == 0){
+            //nada a ser feito
+          }else{
+            if(display.innerText.length === 1){
+              display.innerText = '0'
+            }else{
+              display.innerText = display.innerText.slice(0, -1)
+            }          
+          }
+          break;
+        default:
+          window.alert("Erro!");
+      }
+    }
+
+
+
     //Escutadores que ativam as funções-----------------------------------
 
-    teclaNum[0].addEventListener('click', function(){mostraNum(0)}, false)
-    teclaNum[1].addEventListener('click', function(){mostraNum(1)}, false)
-    teclaNum[2].addEventListener('click', function(){mostraNum(2)}, false)
-    teclaNum[3].addEventListener('click', function(){mostraNum(3)}, false)
-    teclaNum[4].addEventListener('click', function(){mostraNum(4)}, false)
-    teclaNum[5].addEventListener('click', function(){mostraNum(5)}, false)
-    teclaNum[6].addEventListener('click', function(){mostraNum(6)}, false)
-    teclaNum[7].addEventListener('click', function(){mostraNum(7)}, false)
-    teclaNum[8].addEventListener('click', function(){mostraNum(8)}, false)
-    teclaNum[9].addEventListener('click', function(){mostraNum(9)}, false)
+    teclaNum[0].addEventListener('click', function(){mostraNum('0')}, false)
+    teclaNum[1].addEventListener('click', function(){mostraNum('1')}, false)
+    teclaNum[2].addEventListener('click', function(){mostraNum('2')}, false)
+    teclaNum[3].addEventListener('click', function(){mostraNum('3')}, false)
+    teclaNum[4].addEventListener('click', function(){mostraNum('4')}, false)
+    teclaNum[5].addEventListener('click', function(){mostraNum('5')}, false)
+    teclaNum[6].addEventListener('click', function(){mostraNum('6')}, false)
+    teclaNum[7].addEventListener('click', function(){mostraNum('7')}, false)
+    teclaNum[8].addEventListener('click', function(){mostraNum('8')}, false)
+    teclaNum[9].addEventListener('click', function(){mostraNum('9')}, false)
     ponto.addEventListener('click', mostraPonto, false)
     igual.addEventListener('click', exibeResultado, false)
     mais.addEventListener('click', function(){indicaOperacao('+')} , false)
@@ -162,5 +215,5 @@ document.addEventListener('DOMContentLoaded', function() {
     mult.addEventListener('click', function(){indicaOperacao('*')}, false)
     divide.addEventListener('click', function(){indicaOperacao('/')}, false)
     limpa.addEventListener('click', limpaTela, false)
-
+    back.addEventListener('click', backspace, false)
 },false)
