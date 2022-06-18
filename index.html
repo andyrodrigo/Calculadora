@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="imagens/icon32.png">
+
+    <script src="popup.js"></script>
+
+    <title>CALCULADORA</title>
+</head>
+<body>
+  <div id="corpo">
+
+    <header>
+      <p id="marca">AndyCalculator</p>
+      <div id="tela">
+        <p name="display" id="display">0</p>
+      </div>
+      <div id="memo"></div>
+      <div id="res">Resultado:</div>
+    </header>
+
+    <main>
+        <table id="teclado">
+            <tr class="linha">
+              <td class="coluna"> <input type="button" class="teclas" id="num01" value="1"></td>
+              <td class="coluna"> <input type="button" class="teclas" id="num02" value="2"></td>
+              <td class="coluna"> <input type="button" class="teclas" id="num03" value="3"></td>
+              <td class="coluna"> <div class="teclas" id="mais"><img class="imagemSinais" src="imagens/mais.png" alt="sinal de adição"></div></td>
+              <td class="coluna"> <div class="teclas" id="back"><img class="imagemDeTecla" src="imagens/back.png" alt="seta"></div></td>
+            </tr>
+            <tr class="linha">
+              <td class="coluna"> <input type="button" class="teclas" id="num04" value="4"></td>
+              <td class="coluna"> <input type="button" class="teclas" id="num05" value="5"></td>
+              <td class="coluna"> <input type="button" class="teclas" id="num06" value="6"></td>
+              <td class="coluna"> <div class="teclas" id="menos"><img class="imagemSinais" src="imagens/menos.png" alt="sinal de subtração"></div></td>
+              <td class="coluna"> <div class="teclas" id="limpa"><img class="imagemDeTecla" src="imagens/eraser.png" alt="borracha"></div></td>
+            <tr class="linha">
+              <td class="coluna"> <input type="button" class="teclas" id="num07" value="7"></td>
+              <td class="coluna"> <input type="button" class="teclas" id="num08" value="8"></td>
+              <td class="coluna"> <input type="button" class="teclas" id="num09" value="9"></td>
+              <td class="coluna"> <div class="teclas" id="mult"><img class="imagemSinais" src="imagens/mult.png" alt="sinal de multiplicação"></div></td>
+            </tr>
+            <tr class="linha">
+              <td class="coluna"> <input type="button" class="teclas" id="ponto" value=","></td>
+              <td class="coluna"> <input type="button" class="teclas" id="num00" value="0"></td>
+              <td class="coluna"> <input type="button" class="teclas" id="igual" value="="></td>
+              <td class="coluna"> <div class="teclas" id="divide"><img class="imagemSinais" src="imagens/div.png" alt="sinal de divisão"></div></td>
+            </tr>
+          </table>
+    </main>
+  </div>  
+</body>
+</html>
