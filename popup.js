@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return Number(resp)
     }
 
-
+    //insere a virgula, no caso, apenas se um número for clicado depois
     function mostraPonto() {
       let dot = /[.]/g //Expressãso regular com um ponto dentro
       if(display.innerText.search(dot) == '-1'){//testa se já tem um ponto no numero
@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    //desativa a vírgula
     function encerraPonto(){
       flutuante = false
       ponto.classList.remove("ativo");
@@ -191,8 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
           window.alert("Erro!");
       }
     }
-
-
 
     //Escutadores que ativam as funções-----------------------------------
 
